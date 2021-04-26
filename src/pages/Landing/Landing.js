@@ -1,16 +1,13 @@
 import React from 'react';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserProvider';
 
 const LandingPage = () => {
-    const [user, setUser] = useContext(UserContext);
-
-    if (user) Redirect
-
-
     return (
         <div className="LandingPage">
-
+            <Link to="/Signin">Sign in</Link>
+            <Link to="/login">Login</Link>
         </div>
     );
 }

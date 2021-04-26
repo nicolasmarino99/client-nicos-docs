@@ -10,7 +10,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import LandingPage from './pages/Landing/Landing';
 
 const App = () => {
-  const [user, setUser] = useContext(UserContext);
+  const [token, setToken] = useContext(UserContext);
 
   const routes = [
     { path: '/dashboard/:id', key: 'Dashboard', component: Dashboard },
@@ -29,7 +29,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            {user ? <Redirect to="/dashboard/:id" /> : <LandingPage />}
+            {token ? <Redirect to="/dashboard/:id" /> : <LandingPage />}
           </Route>
           {routes.map(({ path, key, component }) => (
             <Route exact path={path} key={key} component={component} />
