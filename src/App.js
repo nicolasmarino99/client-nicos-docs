@@ -16,11 +16,11 @@ const App = () => {
     { path: '/dashboard/:id', key: 'Dashboard', component: Dashboard },
     { path: '/login', key: 'About', component: Login },
     { path: '/signin', key: 'Moves', component: SignIn },
-    //{ path: '/generations', key: 'Generations', component: Generations },
-    //{ path: '/items', key: 'Items', component: Items },
-    //{ path: '/locations', key: 'Locations', component: Locations },
-    //{ path: '/machines', key: 'Machines', component: Machines },
-    //{ path: '/pokemons/:name', key: 'pokemons', component: Pokemon },
+    // { path: '/generations', key: 'Generations', component: Generations },
+    // { path: '/items', key: 'Items', component: Items },
+    // { path: '/locations', key: 'Locations', component: Locations },
+    // { path: '/machines', key: 'Machines', component: Machines },
+    // { path: '/pokemons/:name', key: 'pokemons', component: Pokemon },
     { path: '/*', key: 'notFound', component: () => '404 NOT FOUND' },
   ];
 

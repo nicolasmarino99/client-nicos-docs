@@ -1,11 +1,81 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { UserContext } from '../../../contexts/UserProvider';
+import { logginUserRequest, base } from '../../../api/apiCalls';
 
 const SignIn = () => {
-    return (
-        <div className="SignIn">
-            
+  const [user, setUser] = useContext(UserContext);
+
+  const [credentials, setCredentials] = useState({
+    name: '',
+    email: '',
+    password: '',
+    errors: '',
+  });
+
+  const { name, email, password } = credentials;
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setCredentials({ ...credentials, [name]: value });
+  };
+
+  const history = useHistory();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const { name, email, password } = credentials;
+    const user = {
+      name,
+      email,
+      password,
+    };
+    logginUserRequest(user, setUser, history, credentials, setCredentials, `${base}/user/auth/login`);
+  };
+
+  return (
+    <div className="SignIn">
+      <form onSubmit={handleSubmit}>
+
+        <div controlId="formBasicName">
+          <label htmlFor="name">name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={name}
+            onChange={handleChange}
+          />
         </div>
-    );
-}
+
+        <div controlId="formBasicEmail">
+          <label htmlFor="email">email</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div controlId="formBasicPassword">
+          <label htmlFor="password">password</label>
+          <input
+            type="text"
+            id="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
+        </div>
+
+        <input type="submit" value="Log In" />
+        or
+        <Link to="/signin">sign up</Link>
+      </form>
+    </div>
+  );
+};
 
 export default SignIn;

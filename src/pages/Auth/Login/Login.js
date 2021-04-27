@@ -1,11 +1,10 @@
-import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../../../contexts/UserProvider';
-import { logginUserRequest } from '../../../api/apiCalls';
+import { logginUserRequest, base } from '../../../api/apiCalls';
 
 const Login = () => {
-    const [user, setUser] = useContext(UserContext);
+  const [user, setUser] = useContext(UserContext);
 
   const [credentials, setCredentials] = useState({
     email: '',
@@ -14,7 +13,6 @@ const Login = () => {
   });
 
   const { email, password } = credentials;
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -30,43 +28,41 @@ const Login = () => {
       email,
       password,
     };
-    logginUserRequest(user, setUser, history, credentials, setCredentials);
+    logginUserRequest(user, setUser, history, credentials, setCredentials, `${base}/user/auth/login`);
   };
 
-  
+  return (
+    <div className="Login">
+      <form onSubmit={handleSubmit}>
 
-    return (
-        <div className="Login">
-            <form onSubmit={handleSubmit}>
-
-                <div controlId="formBasicEmail">
-                    <label for="email">email</label>
-                    <input 
-                        type="text" 
-                        id="email" 
-                        name="email"
-                        value={email}
-                        onChange={handleChange} 
-                    />
-                </div>
-
-                <div controlId="formBasicPassword">
-                    <label for="password">password</label>
-                    <input 
-                        type="text" 
-                        id="password" 
-                        name="password"
-                        value={password}
-                        onChange={handleChange} 
-                    />
-                </div>
-
-                <input type="submit" value="Log In" />
-                or
-                <Link to="/signin">sign up</Link>
-            </form>
+        <div controlId="formBasicEmail">
+          <label htmlFor="email">email</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
         </div>
-    );
-}
+
+        <div controlId="formBasicPassword">
+          <label htmlFor="password">password</label>
+          <input
+            type="text"
+            id="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
+        </div>
+
+        <input type="submit" value="Log In" />
+        or
+        <Link to="/signin">sign up</Link>
+      </form>
+    </div>
+  );
+};
 
 export default Login;
