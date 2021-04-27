@@ -63,6 +63,25 @@ const updateElement = async (element, type, url, dispatch, id) => {
   }
 };
 
+
+const logginUserRequest = async (user, setUser, history, credentials, setCredentials) => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/v1/user/auth/login',
+        { user },
+        { withCredentials: true });
+      if (response.data.logged_in) {
+        setUser(response.data);
+        history.push('/');
+      } else {
+        setCredentials({ ...credentials, errors: response.data.errors });
+      }
+    } catch (err) {
+      // Handle Error Here
+      // eslint-disable-next-line no-console
+      console.error(err);
+    }
+  };
+
 const getImage = async (name) => {
   const clientIDKey = '5phIk2Z31V96pArCaFDbgnDH0rG6gJZ7NMaCr4R3CEg';
   const ulr2 = `https://api.unsplash.com/search/photos/?client_id=${clientIDKey}&query=${name}`;
@@ -70,5 +89,5 @@ const getImage = async (name) => {
   return img;
 };
 export {
-  postElement, getElements, deleteElement, getImage, updateElement,
+  postElement, getElements, deleteElement, getImage, updateElement, logginUserRequest
 };
