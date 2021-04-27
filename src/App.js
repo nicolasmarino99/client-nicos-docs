@@ -14,7 +14,6 @@ import LandingPage from './pages/Landing/Landing';
 const App = () => {
   const [token, setToken] = useContext(TokenContext);
 
-
   const routes = [
     { path: '/dashboard/:id', key: 'Dashboard', component: Dashboard },
     { path: '/login', key: 'About', component: Login },

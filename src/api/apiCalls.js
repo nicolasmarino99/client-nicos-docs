@@ -70,7 +70,8 @@ const logginUserRequest = async (user, setUser, history, credentials, setCredent
     const response = await axios.post(
       url,
       { user },
-      { withCredentials: true });
+      { withCredentials: true },
+    );
     if (response.data.logged_in) {
       setUser(response.data);
       history.push('/');
