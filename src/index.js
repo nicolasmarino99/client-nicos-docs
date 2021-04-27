@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import TokenProvider from './contexts/TokenProvider';
+import UserProvider from './contexts/UserProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TokenProvider>
+      <UserProvider>
+        <App />
+      </UserProvider>
+    </TokenProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

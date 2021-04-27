@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { UserContext } from '../../../contexts/UserProvider';
 import { logginUserRequest, base } from '../../../api/apiCalls';
+import { TokenContext } from '../../../contexts/TokenProvider';
 
 const SignIn = () => {
-  const [user, setUser] = useContext(UserContext);
+  const [token, setToken] = useContext(TokenContext);
 
   const [credentials, setCredentials] = useState({
     name: '',
@@ -30,7 +30,7 @@ const SignIn = () => {
       email,
       password,
     };
-    logginUserRequest(user, setUser, history, credentials, setCredentials, `${base}/user/auth/login`);
+    logginUserRequest(user, setToken, history, credentials, setCredentials, `${base}/user/auth/login`);
   };
 
   return (
