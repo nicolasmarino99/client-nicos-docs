@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { logginUserRequest, base } from '../../../api/apiCalls';
@@ -30,7 +32,7 @@ const SignIn = () => {
       email,
       password,
     };
-    logginUserRequest(user, setToken, history, credentials, setCredentials, `${base}/user/auth/login`);
+    logginUserRequest(user, setToken, history, credentials, setCredentials, '/api/v1/user/auth/register');
   };
 
   return (
@@ -62,7 +64,7 @@ const SignIn = () => {
         <div controlId="formBasicPassword">
           <label htmlFor="password">password</label>
           <input
-            type="text"
+            type="password"
             id="password"
             name="password"
             value={password}
@@ -70,9 +72,9 @@ const SignIn = () => {
           />
         </div>
 
-        <input type="submit" value="Log In" />
+        <input type="submit" value="Sign up" />
         or
-        <Link to="/signin">sign up</Link>
+        <Link to="/login">Log In</Link>
       </form>
     </div>
   );

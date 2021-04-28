@@ -1,10 +1,12 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { logginUserRequest, base } from '../../../api/apiCalls';
 import { TokenContext } from '../../../contexts/TokenProvider';
 
 const Login = () => {
-  const [Token, setToken] = useContext(TokenContext);
+  const [token, setToken] = useContext(TokenContext);
 
   const [credentials, setCredentials] = useState({
     email: '',
@@ -29,6 +31,7 @@ const Login = () => {
       password,
     };
     logginUserRequest(user, setToken, history, credentials, setCredentials, `${base}/user/auth/login`);
+    console.log(token, credentials);
   };
 
   return (
@@ -49,7 +52,7 @@ const Login = () => {
         <div controlId="formBasicPassword">
           <label htmlFor="password">password</label>
           <input
-            type="text"
+            type="password"
             id="password"
             name="password"
             value={password}

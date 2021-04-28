@@ -12,7 +12,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import LandingPage from './pages/Landing/Landing';
 
 const App = () => {
-  const [token, setToken] = useContext(TokenContext);
+  const [token] = useContext(TokenContext);
 
   const routes = [
     { path: '/dashboard/:id', key: 'Dashboard', component: Dashboard },
@@ -26,6 +26,7 @@ const App = () => {
     { path: '/*', key: 'notFound', component: () => '404 NOT FOUND' },
   ];
 
+  console.log(token);
   return (
     <div className="App">
       <Router>
