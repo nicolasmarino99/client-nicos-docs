@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const base = 'http://localhost:5000/api/v1';
+const apiVersion = '/api/v1';
 
 const logginUserRequest = async (user, setToken, history, credentials, setCredentials, url) => {
   try {
@@ -11,7 +11,7 @@ const logginUserRequest = async (user, setToken, history, credentials, setCreden
     );
     if (response.data) {
       setToken(document.cookie);
-      console.log(response.data);
+      console.log(document.cookie, 'login');
       history.push('/');
     } else {
       setCredentials({ ...credentials, errors: response.data.errors });
@@ -24,5 +24,5 @@ const logginUserRequest = async (user, setToken, history, credentials, setCreden
 };
 
 export {
-  logginUserRequest, base,
+  logginUserRequest, apiVersion,
 };

@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { logginUserRequest, base } from '../../../api/apiCalls';
+import { logginUserRequest, apiVersion } from '../../../api/apiCalls';
 import { TokenContext } from '../../../contexts/TokenProvider';
 
 const Login = () => {
@@ -30,7 +30,7 @@ const Login = () => {
       email,
       password,
     };
-    logginUserRequest(user, setToken, history, credentials, setCredentials, `${base}/user/auth/login`);
+    logginUserRequest(user, setToken, history, credentials, setCredentials, `${apiVersion}/user/auth/login`);
     console.log(token, credentials);
   };
 

@@ -4,7 +4,7 @@ import React, { createContext, useState } from 'react';
 export const TokenContext = createContext();
 
 const TokenProvider = ({ children }) => {
-  const [state, setstate] = useState(false);
+  const [state, setstate] = useState(document.cookie);
   return (
     <TokenContext.Provider value={[state, setstate]}>
       {children}

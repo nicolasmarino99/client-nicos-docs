@@ -1,35 +1,35 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 import axios from 'axios';
-import React, { useEffect, useContext } from 'react';
-import { base } from '../../api/apiCalls';
+import React, { useEffect, useContext, useState } from 'react';
 import { TokenContext } from '../../contexts/TokenProvider';
 import { UserContext } from '../../contexts/UserProvider';
 import AuthParser from '../../algorithms/auth';
+import { apiVersion } from '../../api/apiCalls';
 
 const Dashboard = () => {
   const [token, setToken] = useContext(TokenContext);
   const [user, setUser] = useContext(UserContext);
+  const [parsedToken, setParsedToken] = useState('');
 
   useEffect(async () => {
-    setToken(AuthParser(token).cookieTojson().Token);
-    console.log(token);
-    const headers = {
+    console.log(token, parsedToken);
+    await setParsedToken(AuthParser(token).cookieTojson().Token);
+    const headers = await {
       'Content-Type': 'application/json',
-      'auth-token': token,
+      'auth-token': parsedToken,
     };
-
+    const url = await AuthParser(parsedToken || '').parseJwt()._id;
     const result = await axios.get(
-      `${base}/users/${AuthParser(token).parseJwt()._id}`,
+      `${apiVersion}/users/${url}`,
       { headers },
     );
-
-    setUser(result.data);
-  }, [0]);
+    setUser(await result.data);
+  }, [parsedToken]);
   return (
     <div className="Dashboard">
       Hey this is the dashboard
-      {user}
+      {user.name}
     </div>
   );
 };
